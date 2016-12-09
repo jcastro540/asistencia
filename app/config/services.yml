@@ -1,0 +1,24 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    assist.twig_extension:
+        class: AppBundle\Twig\AssistExtension
+        public: false
+        arguments: 
+            doctrine: "@doctrine"
+        tags: 
+            - { name: twig.extension }
+            
+    totalstudent.twig_extension:
+        class: AppBundle\Twig\TotalStudentExtension
+        public: false
+        arguments: 
+            doctrine: "@doctrine"
+        tags: 
+            - { name: twig.extension }

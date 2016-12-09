@@ -1,0 +1,156 @@
+{% extends "AppBundle:Layouts:layout.html.twig"%}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{asset('assets/js/custom/user-profile.js')}}"></script>
+{% endblock %}
+
+{% block content%}
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Perfil del Profesor</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+
+                        <div class="profile_img">
+
+                            <!-- end of image cropping -->
+                            <div id="crop-avatar">
+                                <!-- Current avatar -->
+                                {%if user.imame == null or user.imame == 'null'%}
+                                    <img src="{{asset('assets/images/avatar.png')}}"  class="img-responsive avatar-view" alt="...">
+                                {%else%}
+                                    <img src="{{asset('uploads/users/'~user.imame)}}" class="img-responsive avatar-view" alt="...">
+                                {%endif%}
+
+
+
+                            </div>
+                            <!-- end of image cropping -->
+
+                        </div>
+                        <h3>{{user.name}} {{user.surname}}</h3>
+
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa-user user-profile-icon"></i> {{user.username}}
+                            </li>
+
+                            <li>
+                                <i class="fa fa-briefcase user-profile-icon"></i> 
+                                {% if user.role == "ROLE_ADMIN"%}
+                                    Administrador
+                                {% else%}
+                                    Profesor
+                                {% endif %}
+                            </li>
+
+                            <li class="m-top-xs">
+                                <i class="fa fa-envelope user-profile-icon"></i>
+                                <a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a>
+                            </li>
+                        </ul>
+
+                        <a href="{{path('edit_my_data')}}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Editar mis datos</a>
+                        <br />
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12" id="timeline">
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Cursos Asignados</a>
+                                </li>
+                                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Últimos Cursos</a>
+                                </li>                     
+                            </ul>
+                            <div id="myTabContent" class="tab-content box-content">
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                                    <!-- start recent activity -->
+
+                                    <ul class="messages publication-item">
+                                        {%for course in pagination%}
+                                            <li>                                            
+                                                {%if (course.name == 'HTML5 Y CSS3') or (course.name == 'Diseño de Interfaces') %}
+                                                    <img src="{{asset('assets/images/diseno.png')}}"  class="avatar" alt="...">
+                                                {%elseif (course.name == 'WordPress Avanzado') or (course.name == 'WordPress Básico') %}
+                                                    <img src="{{asset('assets/images/wordpress.png')}}"  class="avatar" alt="...">
+                                                {%elseif (course.name == 'JavaScript') or (course.name == 'Desarrollo Web con Laravel') %}
+                                                    <img src="{{asset('assets/images/development.png')}}"  class="avatar" alt="...">
+                                                {%elseif (course.name == 'Gerencia de Proyectos Web') %}
+                                                    <img src="{{asset('assets/images/gerencia.png')}}"  class="avatar" alt="...">
+                                                {%endif %}
+                                                <div class="message_date">
+                                                    <h3 class="date text-info">{{course.startdate| date('d')}}</h3>
+                                                    <p class="month">{{course.startdate| date('M/Y')}}</p>
+                                                </div>
+                                                <div class="message_wrapper">
+                                                    <a href="{{path('student_course_list', {course: course.id})}}" target="_blank"><h4 class="heading">{{course.name}}</h4></a>
+                                                    <blockquote class="message"><strong>Tipo: </strong>{{course.type}}</blockquote>
+                                                    <blockquote class="message"><strong>Clases: </strong>{{course.numclass}}</blockquote>
+                                                    <blockquote class="message"><strong>Fecha de finalización: </strong>{{course.enddate|date('d/M/Y')}}</blockquote>
+                                                    <blockquote class="message"><strong>Alumnos Inscritos: </strong>{{course.id|totalstudent()}}</blockquote>
+                                                    <br/>                                                    
+                                                </div>
+                                            </li>
+                                        {%endfor%}                                        
+                                    </ul>
+                                    <!-- end recent activity -->
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                                    <!-- start user projects -->
+                                    <table class="data table table-striped no-margin">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Curso</th>
+                                                <th>Clases</th>
+                                                <th>Fecha Inicio</th>
+                                                <th>Fecha Fin</th>
+                                                <th>Tipo</th>
+                                                <th>Alumnos</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                {%for course in pagination%}
+                                                    <td>{{course.name}}</td>
+                                                    <td>{{course.numclass}}</td>
+                                                    <td>{{course.startdate| date('d/M/Y')}}</td>
+                                                    <td>{{course.enddate| date('d/M/Y')}}</td>
+                                                    <td>{{course.type}}</td>
+                                                    <td>{{course.id|totalstudent()}}</td>
+                                                </tr>
+                                            {%endfor%} 
+                                        </tbody>
+                                    </table>
+                                    <!-- end user projects -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation">
+                            {{knp_pagination_render(pagination)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

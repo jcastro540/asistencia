@@ -1,0 +1,20 @@
+app_user:
+    resource: "@AppBundle/Resources/config/routing/user.yml"
+    prefix: /
+    
+app_course:
+    resource: "@AppBundle/Resources/config/routing/course.yml"
+    prefix: /
+    
+app_student:
+    resource: "@AppBundle/Resources/config/routing/student.yml"
+    prefix: /
+
+app_assist:
+    resource: "@AppBundle/Resources/config/routing/assist.yml"
+    prefix: /
+    
+app_homepage:
+    path: /
+    defaults: { _controller: AppBundle:User:login}
+    

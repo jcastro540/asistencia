@@ -1,0 +1,35 @@
+{%extends "AppBundle:Layouts:layout.html.twig"%}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{asset('assets/js/custom/show-img.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Editar mis Datos</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 register-form">
+            <div class="x_panel">
+                
+                <img id="img" class="avatar-preview" style="display: none;"
+                     {%if (app.user.imame == null) or (app.user.imame == 'null')%}
+                         src="{{asset('assets/images/avatar.png')}}"
+                     {%else%}
+                         src="{{asset('uploads/users/'~app.user.imame)}}"
+                     {%endif%}
+                     alt="" />
+                {{form_start(form,{'enctype':'multipart/form-data'})}}
+                {{form_end(form)}}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

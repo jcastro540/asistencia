@@ -1,0 +1,20 @@
+home:
+    path: /home
+    defaults: { _controller:AppBundle:Course:MyCourseList }
+    
+    
+course_list:
+    path: /course-list
+    defaults: { _controller:AppBundle:Course:courseList }
+
+create_course:
+    path: /create-course
+    defaults: { _controller:AppBundle:Course:createCourse }
+    
+edit_course:
+    path: /edit-course/{id}
+    defaults: { _controller:AppBundle:Course:editCourse }
+
+delete_course:
+    path: /delete/course/{id}
+    defaults: { _controller:AppBundle:Course:deleteCourse }

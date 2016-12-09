@@ -1,0 +1,40 @@
+login:
+    path: /login
+    defaults: { _controller:AppBundle:User:login }
+    
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
+    
+register:
+    path: /register-user
+    defaults: { _controller:AppBundle:User:register }
+    
+edit_my_data:
+    path: /edit-my-data
+    defaults: { _controller:AppBundle:User:editUser }
+
+edit_user_admin:
+    path: /user/edit/{id}
+    defaults: { _controller:AppBundle:User:editUserAdmin }
+
+users:
+    path: /users
+    defaults: { _controller:AppBundle:User:usersList }
+
+delete_user:
+    path: /user/remove/{id}
+    defaults: { _controller:AppBundle:User:userDelete }
+    
+user:
+    path: /user
+    defaults: {_controller: AppBundle:User:user }    
+
+username_test:
+    path: /username-test
+    defaults: { _controller:AppBundle:User:usernameTest }
+    methods: [POST]
+       
+ 

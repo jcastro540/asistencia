@@ -1,0 +1,87 @@
+{%extends "AppBundle:Layouts:layout.html.twig"%}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{asset('assets/js/custom/user-remove.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Profesores</h3>
+                <span class="label label-primary">
+                    Total de Usuarios: {{ pagination.getTotalItemCount}}
+                </span>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 text-center">                                   
+                                </div>
+                                <div class="clearfix"></div>
+                                {%for user in pagination%}
+
+                                    <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                        <div class="well profile_view">
+                                            <div class="col-sm-12">
+
+                                                <div class="left col-xs-12">
+                                                    <h2>{{user.name}} {{user.surname}}</h2>
+                                                    <p><strong>Username: </strong> {{user.username}} </p>                                                   
+                                                    <p><strong>Role: </strong> 
+                                                        {%if user.role == 'ROLE_ADMIN'%}
+                                                            Administrador
+                                                        {%else%}
+                                                            Profesor
+                                                        {%endif%}
+                                                    </p>
+                                                </div>
+                                                <div class="right col-xs-5 text-center">
+                                                    {%if (user.imame == 'null') or (user.imame == null)%}
+                                                        <img src="{{asset('assets/images/avatar.png')}}"  class="img-circle img-responsive" alt="...">
+                                                    {%else%}
+                                                        <img src="{{asset('uploads/users/'~user.imame)}}" class="img-circle img-responsive" alt="...">
+                                                    {%endif%}
+                                                </div>
+                                            </div>
+                                            {%if  app.user.role == "ROLE_ADMIN"%}
+                                                <div class="col-xs-12 bottom text-center">
+                                                    <div class="col-xs-12 col-sm-12 emphasis">                                                    
+
+                                                        <a href="{{path('edit_user_admin',{'id':user.id})}}" class="btn btn-xs btn-info">
+                                                            <i class="fa fa-user">
+                                                            </i> <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <button type="button" class="btn btn-danger btn-xs btn-delete" data-id="{{user.id}}"> <i class="fa fa-user">
+                                                            </i> <i class="fa fa-trash"></i> </button>
+                                                    </div>
+                                                </div>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /page content -->
+
+
+        <div class="navigation">
+            {{knp_pagination_render(pagination)}}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

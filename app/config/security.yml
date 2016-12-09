@@ -1,0 +1,66 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+    encoders:
+        BackendBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 4
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    #Login 
+    providers:
+        user_db_provider:
+            entity:
+                class: BackendBundle:User
+                property: username
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            http_basic: ~
+            provider: user_db_provider
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path: logout
+                target: /
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+    #LOGIN Y USUARIOS
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+    - { path: ^/register-user, roles: [ROLE_ADMIN]}
+    - { path: ^/edit-my-data, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/user/edit, roles: [ROLE_ADMIN]}
+    - { path: ^/users, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/user/remove, roles: [ROLE_ADMIN]}
+    - { path: ^/user, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/username-test, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    #CURSOS
+    - { path: ^/home, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/course-list, roles: [ROLE_ADMIN]}
+    - { path: ^/create-course, roles: [ROLE_TEACHER, ROLE_ADMIN]}    
+    - { path: ^/edit-course, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/delete/course, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    #ESTUDIANTES
+    - { path: ^/create-student, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/student/students-list, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/edit-student, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/delete/student, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    #ASISTENCIA
+    - { path: ^/assist, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/unassist, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/check_assist, roles: [ROLE_TEACHER, ROLE_ADMIN]}
+    - { path: ^/all-students, roles: [ROLE_ADMIN]}
+    - { path: ^/my-students, roles: [ROLE_TEACHER, ROLE_ADMIN]}

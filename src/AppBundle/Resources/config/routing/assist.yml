@@ -1,0 +1,13 @@
+assist:
+    path: /assist
+    defaults: { _controller:AppBundle:Assist:assist }
+    methods: [POST]
+
+unassist:
+    path: /unassist
+    defaults: { _controller:AppBundle:Assist:unassist }
+    methods: [POST]
+    
+ckeck_assist:
+    path: /check_assist/{id}
+    defaults: { _controller:AppBundle:Assist:checkAsist }

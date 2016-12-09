@@ -1,0 +1,23 @@
+create_student:
+    path: /create-student/{course}
+    defaults: { _controller:AppBundle:Student:createStudent }
+
+student_course_list:
+    path: /student/students-list/{course}
+    defaults: { _controller:AppBundle:Student:studentList }
+    
+edit_student:
+    path: /edit-student/{id}
+    defaults: { _controller:AppBundle:Student:editStudent }
+    
+delete_student:
+    path: /delete/student/{id}
+    defaults: { _controller:AppBundle:Student:removeStudent }
+
+all_students:
+    path: /all-students
+    defaults: { _controller:AppBundle:Student:allStudents }
+
+my_students:
+    path: /my-students
+    defaults: { _controller:AppBundle:Student:myStudents }

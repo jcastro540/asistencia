@@ -1,0 +1,82 @@
+.site_title{
+    font-size: 16px;
+}
+
+.form-control{
+    border-radius: 0!important;
+}
+
+.login_content form input[type="submit"], #content form .submit{
+    margin-left: 0;
+}
+
+.register-form input, .register-form select{
+    margin-bottom: 10px;
+}
+
+.iradio_flat-green{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.profile_details .profile_view .center-block{
+    border:none!important;
+}
+
+.jconfirm .jconfirm-scrollpane{
+    overflow: hidden;
+}
+
+.alumno{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 300ms linear;
+}
+.alumno:hover{
+    background-color: rgba(52, 73, 94,1);
+}
+
+.alumno:hover span{
+    display: none;
+}
+
+.alumno a, .alumno button {
+    display: none;
+}
+
+.alumno:hover a, .alumno:hover button{
+    display: block;
+    margin-top: 4px;
+}
+
+blockquote{
+    font-size: 14px;
+}
+
+.tooltip-wrapper {
+    display: inline-block; /* display: block works as well */
+}
+
+.tooltip-wrapper .btn[disabled] {
+    pointer-events: none;
+}
+
+.tooltip-wrapper.disabled {
+    cursor: not-allowed;
+}
+
+ul.messages li img.avatar, img.avatar{
+    background: none;
+    border: none;
+}
+
+.avatar-preview{
+    width: 250px;
+    height: auto;
+    margin-bottom:10px;
+    border-radius:5px;
+}

@@ -1,0 +1,144 @@
+<?php
+
+namespace BackendBundle\Entity;
+
+/**
+ * Assist
+ */
+class Assist
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $assists;
+    
+    /**
+     * @var string
+     */
+    
+    private $clase;
+    /**
+     * @var \BackendBundle\Entity\Course
+     */
+    private $course;
+
+    /**
+     * @var \BackendBundle\Entity\Student
+     */
+    private $student;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set assists
+     *
+     * @param string $assists
+     *
+     * @return Assist
+     */
+    public function setAssists($assists)
+    {
+        $this->assists = $assists;
+
+        return $this;
+    }
+
+    /**
+     * Get assists
+     *
+     * @return string
+     */
+    public function getAssists()
+    {
+        return $this->assists;
+    }
+    
+    /**
+     * Set clase
+     *
+     * @param string $clase
+     *
+     * @return clase
+     */
+    
+    
+    public function setClase($clase)
+    {
+        $this->$clase = $clase;
+
+        return $this;
+    }
+
+    /**
+     * Get clase
+     *
+     * @return string
+     */
+    public function getClase()
+    {
+        return $this->clase;
+    }
+
+    /**
+     * Set course
+     *
+     * @param \BackendBundle\Entity\Course $course
+     *
+     * @return Assist
+     */
+    public function setCourse(\BackendBundle\Entity\Course $course = null)
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * Get course
+     *
+     * @return \BackendBundle\Entity\Course
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * Set student
+     *
+     * @param \BackendBundle\Entity\Student $student
+     *
+     * @return Assist
+     */
+    public function setStudent(\BackendBundle\Entity\Student $student = null)
+    {
+        $this->student = $student;
+
+        return $this;
+    }
+
+    /**
+     * Get student
+     *
+     * @return \BackendBundle\Entity\Student
+     */
+    public function getStudent()
+    {
+        return $this->student;
+    }
+}
+

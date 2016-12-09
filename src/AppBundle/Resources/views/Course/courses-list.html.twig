@@ -1,0 +1,103 @@
+{%extends "AppBundle:Layouts:layout.html.twig"%}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{asset('assets/js/custom/course-remove.js')}}"></script> 
+    <script src="{{asset('assets/js/custom/infinite-scroll.js')}}"></script>  
+{% endblock %}
+
+{%block content%}
+    <!-- page content -->
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Listado de Cursos</h3>
+                <span class="label label-primary">
+                    Total de Cursos: {{ pagination.getTotalItemCount}}
+                </span>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" id="timeline">
+                    <div class="x_panel box-content">
+                        <div class="x_content">
+                            <div class="row publication-item">
+                                <div class="col-md-12 col-sm-12 col-xs-12 text-center">                                   
+                                </div>
+                                <div class="clearfix"></div>
+                                {%for course in pagination%}
+                                    <div class="col-md-4 col-sm-4 col-xs-12 profile_details ">
+                                        <div class="well profile_view">
+                                            <div class="col-sm-12">
+                                                <div class="col-xs-12 text-center">
+                                                    {%if (course.name == 'HTML5 Y CSS3') or (course.name == 'Diseño de Interfaces') %}
+                                                        <img src="{{asset('assets/images/diseno.png')}}"  class="img-circle img-responsive center-block" alt="...">
+                                                    {%elseif (course.name == 'WordPress Avanzado') or (course.name == 'WordPress Básico') %}
+                                                        <img src="{{asset('assets/images/wordpress.png')}}"  class="img-circle img-responsive center-block" alt="...">
+                                                    {%elseif (course.name == 'JavaScript') or (course.name == 'Desarrollo Web con Laravel') %}
+                                                        <img src="{{asset('assets/images/development.png')}}"  class="img-circle img-responsive center-block" alt="...">
+                                                    {%elseif (course.name == 'Gerencia de Proyectos Web') %}
+                                                        <img src="{{asset('assets/images/gerencia.png')}}"  class="img-circle img-responsive center-block" alt="...">
+                                                    {%endif %}
+                                                </div>
+
+                                                <div class="left col-xs-12">
+                                                    <h2 class="text-center">{{course.name}}</h2>
+                                                    <p><strong>Fecha de Inicio: </strong> {{course.startdate| date('d/m/Y')}}</p>
+                                                    <p><strong>Fecha de Fin: </strong> {{course.enddate| date('d/m/Y')}}</p>
+                                                    <p><strong>Horario: </strong> {{course.type}}</p>
+                                                    <p><strong>Profesor: </strong> {{course.user.name}} {{course.user.surname}}</p>                                                   
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-12 bottom text-center">
+
+                                                <div class="col-xs-12 col-sm-12 emphasis">                                                    
+                                                    <a href="{{path('edit_course',{id: course.id})}}" class="btn btn-xs btn-info">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    {%if course.id|totalstudent() > 0%}
+                                                        <div class="tooltip-wrapper disabled" data-title="No se puede eliminar el curso">
+                                                            <button type="button" class="btn btn-danger btn-xs btn-delete" disabled="disabled">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button> 
+                                                        </div>
+                                                    {%else%}
+                                                        <button type="button" class="btn btn-danger btn-xs btn-delete" data-id="{{course.id}}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button> 
+                                                    {%endif%}
+                                                    <i class="fa fa-ellipsis-v" aria-hidden="true" style="margin-right: 5px;"></i>
+                                                    <a href="{{path('create_student',{course: course.id})}}" class="btn btn-xs btn-primary">
+                                                        <i class="fa fa-plus"></i>
+                                                        <i class="fa fa-user"></i>
+                                                    </a>
+                                                    <a href="{{path('student_course_list', {course: course.id})}}" class="btn btn-xs btn-primary">
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /page content -->
+
+
+        <div class="navigation">
+            {{knp_pagination_render(pagination)}}
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

@@ -1,0 +1,54 @@
+BackendBundle\Entity\Assist:
+    type: entity
+    table: assists
+    indexes:
+        fk_assists_students:
+            columns:
+                - student_id
+        fk_assists_courses:
+            columns:
+                - course_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        assists:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        class:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        course:
+            targetEntity: Course
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                course_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        student:
+            targetEntity: Student
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                student_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
